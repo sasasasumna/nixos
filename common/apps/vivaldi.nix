@@ -5,23 +5,15 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./apps/firefox.nix
-      ./apps/vim.nix
-      ./apps/vivaldi.nix
-    ];
 
   environment.systemPackages = with pkgs; [
-    git
-    htop
-    code-cursor
-    curl
-    ghostty
-    slack
-    vim 
-    wget
-    zoom-us
+    (vivaldi.overrideAttrs
+      (oldAttrs: {
+        dontWrapQtApps = false;
+        dontPatchELF = true;
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
+      }))
+    vivaldi-ffmpeg-codecs
   ];
 }
 
