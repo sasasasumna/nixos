@@ -4,6 +4,10 @@ MACHINE=$1
 
 if [ -e "${MACHINE}.nix" ]; then
   if [ -e "${MACHINE}/hardware-configuration.nix" ]; then
+    # TODO: fix home-manager integration, it is not found in PATH
+    # nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    # nix-channel --update
+
     ln -sf $1/hardware-configuration.nix ./hardware-configuration.nix
     ln -sf $1.nix ./configuration.nix
     exit 0
