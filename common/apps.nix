@@ -7,6 +7,7 @@
 {
   imports =
     [
+      ./apps/docker.nix
       ./apps/firefox.nix
       ./apps/steam.nix
       ./apps/vim.nix
