@@ -8,19 +8,28 @@
   imports =
     [
       ./apps/firefox.nix
+      ./apps/steam.nix
       ./apps/vim.nix
       ./apps/vivaldi.nix
     ];
 
   environment.systemPackages = with pkgs; [
+    bzip2
     git
     htop
     code-cursor
     curl
+    figma-linux
     ghostty
+    keychain
+    lz4
+    openssl
+    ripgrep
     slack
+    spotify
     vim 
     wget
+    xz
     zoom-us
   ];
 }

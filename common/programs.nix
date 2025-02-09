@@ -11,6 +11,8 @@
     enableSSHSupport = true;
   };
 
+  programs.java.enable = true;
+
   programs.mtr.enable = true;
 
   programs.zsh.enable = true;
