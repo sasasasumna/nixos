@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./devbox/system.nix
-      ./devbox/nvidia.nix
+      ./devbox/graphics.nix
       ./common.nix
     ];
 
