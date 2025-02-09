@@ -16,13 +16,15 @@
 
   environment.systemPackages = with pkgs; [
     bzip2
-    git
-    htop
     code-cursor
     curl
+    doctl
     figma-linux
     ghostty
+    git
+    htop
     keychain
+    kubectl
     lz4
     openssl
     ripgrep
