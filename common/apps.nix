@@ -27,6 +27,7 @@
     ripgrep
     slack
     spotify
+    tmux
     vim 
     wget
     xz
