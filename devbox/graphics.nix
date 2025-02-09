@@ -19,10 +19,12 @@
     clinfo
   ];
 
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" ];
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   hardware.nvidia = {
 
