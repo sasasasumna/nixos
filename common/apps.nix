@@ -20,6 +20,7 @@
     curl
     dnsmasq
     doctl
+    electron
     ffmpeg
     figma-linux
     fuse
