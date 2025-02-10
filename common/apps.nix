@@ -15,6 +15,8 @@
     ];
 
   environment.systemPackages = with pkgs; [
+    akonadi
+    avahi
     bzip2
     code-cursor
     curl
@@ -46,6 +48,7 @@
     mariadb
     mlocate
 #    mongodb
+    morgen
     mtools
     openmpi
     openssl
