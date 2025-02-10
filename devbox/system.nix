@@ -5,6 +5,14 @@
 
 {
 
+  nix.settings.system-features = [
+    "kvm"
+    "big-parallel"
+    "benchmark"
+    "nixos-test"
+    "gccarch-znver4"
+  ];
+
   fileSystems."/" =
       { options = [ "rw" "noatime" "discard=async" "compress-force=zstd" "space_cache=v2" "commit=120" ];
       };
