@@ -53,7 +53,6 @@
     openmpi
     openssl
     pciutils
-    postgresql_13
     redis
     ripgrep
     slack

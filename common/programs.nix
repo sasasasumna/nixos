@@ -6,6 +6,9 @@
 
 {
   # These need to be called with sudo
+
+  programs.direnv.enable = true;
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
