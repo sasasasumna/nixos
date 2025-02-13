@@ -6,12 +6,7 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       libva
-      rocmPackages.clr.icd
-    ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
     ];
   };
 
@@ -19,10 +14,10 @@
     clinfo
   ];
 
-  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" ];
+  boot.initrd.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" ];
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   nixpkgs.config.nvidia.acceptLicense = true;
 
