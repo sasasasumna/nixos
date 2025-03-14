@@ -6,15 +6,19 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      libva
+      nvidia-vaapi-driver
+    ];
+    extraPackages32 = with pkgs; [
     ];
   };
+
+  services.frigate.vaapiDriver = "nvidia";
 
   environment.systemPackages = with pkgs; [
     clinfo
   ];
 
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" ];
+  boot.initrd.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" "i2c-nvidia_gpu" ];
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -22,6 +26,8 @@
   nixpkgs.config.nvidia.acceptLicense = true;
 
   hardware.nvidia = {
+
+    videoAcceleration = true;
 
     # Modesetting is required.
     modesetting.enable = true;

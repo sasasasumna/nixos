@@ -21,8 +21,16 @@
     };
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+    ];
+  };
 }
 

@@ -37,6 +37,12 @@
     };
   };
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  security.rtkit.enable = true;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 }

@@ -15,21 +15,31 @@
     ];
 
   environment.systemPackages = with pkgs; [
-    akonadi
+    kdePackages.akonadi
     avahi
+    awscli2
+    azure-cli
     bzip2
     code-cursor
     curl
     dnsmasq
     doctl
+    drm_info
+    egl-wayland
+    eksctl
     electron
+    exfatprogs
     ffmpeg
     figma-linux
+    flarectl
     fuse
     fuse3
     ghostty
     git
     go
+    google-chrome
+    gparted
+    gpu-viewer
     gtk2
     gtk3
     gtk4
@@ -39,16 +49,18 @@
     imagemagick
     inetutils
     iputils
+    kdePackages.xdg-desktop-portal-kde
     keychain
     kubectl
     less
+    libGL
+    libva-utils
+    libyaml
     linux-firmware
     linuxHeaders
     lz4
     mariadb
     mlocate
-#    mongodb
-    morgen
     mtools
     openmpi
     openssl
@@ -58,10 +70,15 @@
     slack
     spotify
     tmux
+    traceroute
     unzip
+    vdpauinfo
     vim 
     vips
+    vulkan-tools
     wget
+    #wrangler
+    xdg-desktop-portal
     xz
     zip
     zoom-us
