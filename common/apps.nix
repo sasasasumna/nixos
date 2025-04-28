@@ -14,13 +14,16 @@
       ./apps/vivaldi.nix
     ];
 
+  services.flatpak.enable = true;
+
   environment.systemPackages = with pkgs; [
     kdePackages.akonadi
+    appimage-run
     avahi
     awscli2
     azure-cli
     bzip2
-    code-cursor
+    cpu-x
     curl
     dnsmasq
     doctl
@@ -34,6 +37,7 @@
     flarectl
     fuse
     fuse3
+    gearlever
     ghostty
     git
     go
@@ -55,6 +59,8 @@
     less
     libGL
     libva-utils
+    libxml2
+    libxslt
     libyaml
     linux-firmware
     linuxHeaders
@@ -75,6 +81,7 @@
     vdpauinfo
     vim 
     vips
+    vlc
     vulkan-tools
     wget
     #wrangler

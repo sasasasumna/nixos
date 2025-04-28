@@ -7,13 +7,19 @@
 {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
+  services.avahi.enable = true;
+
   services.pipewire = {
+    raopOpenFirewall = true;
     enable = true;
     alsa = {
       enable = true;
@@ -22,15 +28,33 @@
     pulse.enable = true;
     jack.enable = true;
     wireplumber.enable = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+    
+            # increase the buffer size if you get dropouts/glitches
+            # args = {
+            #   "raop.latency.ms" = 500;
+            # };
+          }
+        ];
+      };
+    };
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-    ];
+    config = {
+      common = {
+        default = [
+          "kde"
+        ];
+      };
+    };
   };
 }
 

@@ -18,6 +18,12 @@
     clinfo
   ];
 
+  environment.variables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+  };
+
   boot.initrd.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_modeset" "nvidia_uvm" "i2c-nvidia_gpu" ];
 
   # Load nvidia driver for Xorg and Wayland
