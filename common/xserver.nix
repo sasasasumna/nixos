@@ -7,9 +7,8 @@
 {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
+  services.displayManager = {
+    ly.enable = true;
   };
   services.desktopManager.plasma6.enable = true;
 
@@ -48,6 +47,10 @@
 
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+    ];
     config = {
       common = {
         default = [

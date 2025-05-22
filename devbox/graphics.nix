@@ -5,6 +5,8 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    #driSupport = true;
+    #driSupport32Bit = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
     ];
@@ -16,6 +18,17 @@
 
   environment.systemPackages = with pkgs; [
     clinfo
+    libva-utils
+    vdpauinfo
+    vulkan-tools
+    vulkan-validation-layers
+    libvdpau-va-gl
+    egl-wayland
+    wgpu-utils
+    mesa
+    libglvnd
+    nvtopPackages.nvidia
+    libGL
   ];
 
   environment.variables = {

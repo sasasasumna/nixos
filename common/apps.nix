@@ -23,6 +23,7 @@
     awscli2
     azure-cli
     bzip2
+    code-cursor
     cpu-x
     curl
     dnsmasq
@@ -53,10 +54,10 @@
     imagemagick
     inetutils
     iputils
-    kdePackages.xdg-desktop-portal-kde
     keychain
     kubectl
     less
+    libpulseaudio
     libGL
     libva-utils
     libxml2
@@ -66,11 +67,15 @@
     linuxHeaders
     lz4
     mariadb
+    memcached
     mlocate
     mtools
     openmpi
     openssl
     pciutils
+    qt5.full
+    qt6.full
+    rclone
     redis
     ripgrep
     slack
@@ -86,6 +91,9 @@
     wget
     #wrangler
     xdg-desktop-portal
+    kdePackages.xdg-desktop-portal-kde
+    plasma5Packages.xdg-desktop-portal-kde
+    xdg-desktop-portal-xapp
     xz
     zip
     zoom-us
