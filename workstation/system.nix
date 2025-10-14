@@ -10,6 +10,6 @@
     "big-parallel"
     "benchmark"
     "nixos-test"
-    "gccarch-znver4"
+    "gccarch-znver5"
   ];
 }

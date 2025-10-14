@@ -8,10 +8,13 @@
 
   users.defaultUserShell = pkgs.zsh;
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "docker" "bluetooth" ];
+    hashedPassword = "$6$D.6bS/u..fDpQjJV$d8b5MHIM8YYG9BROEPdb8G64bzlqrJKMqU7GLzdU97Xr4P71./JLjSaS.3ltjZT12IQW4uoy1WuGMudqSmN1I1";
+    packages = with pkgs; [
+      tree
+    ];
   };
-
 }
-

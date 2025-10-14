@@ -15,7 +15,7 @@
     settings.port = 5432;
     enable = true;
     enableTCPIP = true;
-    package = pkgs.postgresql_13;
+    package = pkgs.postgresql_17;
     authentication = pkgs.lib.mkOverride 10 ''
       #...
       #type database DBuser origin-address auth-method
@@ -46,4 +46,3 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 }
-

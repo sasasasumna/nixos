@@ -5,18 +5,14 @@
 { config, lib, pkgs, ... }:
 
 {
-  # These need to be called with sudo
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ./laptop/system.nix
+      ./laptop/graphics.nix
+      ./common.nix
+    ];
 
-  # programs.direnv.enable = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.java.enable = true;
-
-  programs.mtr.enable = true;
-
-  programs.zsh.enable = true;
+  networking.hostName = "Adam-laptop";
 }

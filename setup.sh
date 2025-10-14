@@ -11,7 +11,7 @@ if [ -e "${MACHINE}.nix" ]; then
     ln -sf $1/hardware-configuration.nix ./hardware-configuration.nix
     ln -sf $1.nix ./configuration.nix
     exit 0
-  fi
+  else
 fi
 
 echo "$0 is for properly linking NixOS configurations for <machine>"

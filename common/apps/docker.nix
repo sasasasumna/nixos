@@ -4,7 +4,7 @@
   virtualisation.docker = {
     autoPrune.enable = true;
     daemon.settings = {
-      data-root = "/srv";
+      data-root = "/var/lib/docker";
     };
     enable = true;
     storageDriver = "btrfs";

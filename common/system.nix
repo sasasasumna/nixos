@@ -7,10 +7,87 @@
 {
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "btrfs" ];
-  boot.initrd.luks.devices.root.allowDiscards = true;
+  boot = {
+    supportedFilesystems = [ "btrfs" ];
+
+    loader = {
+      ef = {
+        canTouchEfiVariables = true;
+        efiSysMountpoint = "/boot";
+      };
+
+      systemd-boot.enable = true;
+    };
+
+    initrd = {
+      luks.devices.crypt = {
+        allowDiscards = true;
+        device = "/dev/disks/by-label/crypt";
+      };
+
+      postDeviceCommands = lib.mkAfter ''
+        mkdir /mnt
+        mount -t btrfs /dev/mapper/crypt /mnt
+        btrfs subvolume delete /mnt/
+        btrfs subvolume snapshot /mnt/blank /mnt/
+      '';
+    };
+  };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/" ];
+    };
+
+    "/home" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/home" ];
+    };
+
+    "/nix" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/nix" ];
+    };
+
+    "/var/lib/docker" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/lib/docker" ];
+    };
+
+    "/var/lib/machines" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/lib/machines" ];
+    };
+
+    "/var/log" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/log" ];
+    };
+
+    "/swap" = {
+      device = "/dev/mapper/root";
+      options = [ "ssd" "noatime" "discard=async" "subvol=/swap" ];
+    };
+  };
+
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+    }
+  ]
 
   hardware.enableAllFirmware = true;
 
@@ -24,21 +101,10 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
   console = {
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.adam = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    hashedPassword = "$6$D.6bS/u..fDpQjJV$d8b5MHIM8YYG9BROEPdb8G64bzlqrJKMqU7GLzdU97Xr4P71./JLjSaS.3ltjZT12IQW4uoy1WuGMudqSmN1I1";
-    packages = with pkgs; [
-      tree
-    ];
-  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -60,4 +126,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
