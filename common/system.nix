@@ -11,83 +11,14 @@
     supportedFilesystems = [ "btrfs" ];
 
     loader = {
-      ef = {
+      efi = {
         canTouchEfiVariables = true;
         efiSysMountpoint = "/boot";
       };
 
       systemd-boot.enable = true;
     };
-
-    initrd = {
-      luks.devices.crypt = {
-        allowDiscards = true;
-        device = "/dev/disks/by-label/crypt";
-      };
-
-      postDeviceCommands = lib.mkAfter ''
-        mkdir /mnt
-        mount -t btrfs /dev/mapper/crypt /mnt
-        btrfs subvolume delete /mnt/
-        btrfs subvolume snapshot /mnt/blank /mnt/
-      '';
-    };
   };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/" ];
-    };
-
-    "/home" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/home" ];
-    };
-
-    "/nix" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/nix" ];
-    };
-
-    "/var/lib/docker" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/lib/docker" ];
-    };
-
-    "/var/lib/machines" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/lib/machines" ];
-    };
-
-    "/var/log" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "ssd" "rw" "noatime" "discard=async" "compress=zstd" "space_cache=v2" "commit=120" "subvol=/var/log" ];
-    };
-
-    "/swap" = {
-      device = "/dev/mapper/root";
-      options = [ "ssd" "noatime" "discard=async" "subvol=/swap" ];
-    };
-  };
-
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-    }
-  ]
 
   hardware.enableAllFirmware = true;
 
