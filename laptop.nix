@@ -5,6 +5,12 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  imports =
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+      ./common.nix
+    ];
+
 
   nix.settings.system-features = [
     "kvm"
@@ -21,6 +27,8 @@
   # Hibernate on power button pressed
   services.logind.powerKey = "hibernate";
   services.logind.powerKeyLongPress = "poweroff";
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Suspend first
   boot.kernelParams = ["mem_sleep_default=deep"];
@@ -42,10 +50,6 @@
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";
   };
-
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
 
   boot.initrd.availableKernelModules = [ "btrfs" "nvme" "xhci_pci" "thunderbolt" "uas" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "kvm-amd" "amdgpu" "radeon" "thunderbolt" "xhci_pci" "nvme" "btrfs" ];
@@ -95,5 +99,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
 }
