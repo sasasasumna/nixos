@@ -22,13 +22,29 @@
 
 
   services.power-profiles-daemon.enable = true;
+
   # Suspend first then hibernate when closing the lid
   services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.lidSwitchExternalPower = "lock";
+
   # Hibernate on power button pressed
   services.logind.powerKey = "hibernate";
   services.logind.powerKeyLongPress = "poweroff";
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  services.thermald.enable = true;
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+       governor = "powersave";
+       turbo = "never";
+    };
+    charger = {
+       governor = "performance";
+       turbo = "auto";
+    };
+  };
 
   # Suspend first
   boot.kernelParams = ["mem_sleep_default=deep"];
@@ -58,7 +74,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
       fsType = "btrfs";
-      options = [ "subvol=@root" ];
+      options = [ "defaults,ssd,subvol=@root,compress=zstd:1,discard=async" ];
     };
 
   boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/469b30c9-25e7-42dd-9655-01c70fae196c";
@@ -72,25 +88,25 @@
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = [ "defaults,ssd,subvol=@home,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
       fsType = "btrfs";
-      options = [ "subvol=@nix" ];
+      options = [ "defaults,ssd,subvol=@nix,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/var/lib/docker" =
     { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
       fsType = "btrfs";
-      options = [ "subvol=@docker" ];
+      options = [ "defaults,ssd,subvol=@docker,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/var/log" =
     { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
       fsType = "btrfs";
-      options = [ "subvol=@log" ];
+      options = [ "defaults,ssd,subvol=@log,compress=zstd:1,discard=async" ];
     };
 
   swapDevices =
