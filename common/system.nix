@@ -13,7 +13,7 @@
     loader = {
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountpoint = "/boot";
+        efiSysMountPoint = "/boot";
       };
 
       systemd-boot.enable = true;
@@ -35,6 +35,8 @@
   console = {
     useXkbConfig = true; # use xkb.options in tty.
   };
+
+  powerManagement.enable = true;
 
 
   # This option defines the first version of NixOS you have installed on this particular machine,
