@@ -20,31 +20,19 @@
     "gccarch-znver5"
   ];
 
-
   services.power-profiles-daemon.enable = true;
+  services.thermald.enable = true;
 
-  # Suspend first then hibernate when closing the lid
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.lidSwitchExternalPower = "lock";
-
-  # Hibernate on power button pressed
-  services.logind.powerKey = "hibernate";
-  services.logind.powerKeyLongPress = "poweroff";
+#  # Suspend first then hibernate when closing the lid
+#  services.logind.lidSwitch = "suspend-then-hibernate";
+#  services.logind.lidSwitchExternalPower = "lock";
+# 
+#  # Hibernate on power button pressed
+#  services.logind.powerKey = "hibernate";
+#  services.logind.powerKeyLongPress = "poweroff";
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  services.thermald.enable = true;
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    battery = {
-       governor = "powersave";
-       turbo = "never";
-    };
-    charger = {
-       governor = "performance";
-       turbo = "auto";
-    };
-  };
 
   # Suspend first
   boot.kernelParams = ["mem_sleep_default=deep"];
@@ -69,48 +57,48 @@
 
   boot.initrd.availableKernelModules = [ "btrfs" "nvme" "xhci_pci" "thunderbolt" "uas" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "kvm-amd" "amdgpu" "radeon" "thunderbolt" "xhci_pci" "nvme" "btrfs" ];
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/35ff357b-980f-475f-80c1-924a33e14bc2";
+  #boot.initrd.luks.devices."swap".device = "/dev/disk/by-uuid/d5c7165d-7b30-4109-b8c1-96964024dbb8";
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
+    { device = "/dev/disk/by-uuid/385cd6a9-d389-4c38-97ac-bd809bba179d";
       fsType = "btrfs";
       options = [ "defaults,ssd,subvol=@root,compress=zstd:1,discard=async" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/469b30c9-25e7-42dd-9655-01c70fae196c";
-
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/7B61-39DA";
+    { device = "/dev/disk/by-uuid/2CD8-4135";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
+    { device = "/dev/disk/by-uuid/385cd6a9-d389-4c38-97ac-bd809bba179d";
       fsType = "btrfs";
       options = [ "defaults,ssd,subvol=@home,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
+    { device = "/dev/disk/by-uuid/385cd6a9-d389-4c38-97ac-bd809bba179d";
       fsType = "btrfs";
       options = [ "defaults,ssd,subvol=@nix,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/var/lib/docker" =
-    { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
+    { device = "/dev/disk/by-uuid/385cd6a9-d389-4c38-97ac-bd809bba179d";
       fsType = "btrfs";
       options = [ "defaults,ssd,subvol=@docker,compress=zstd:1,discard=async" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/4680be83-90f5-4eec-89a9-7647658f092e";
+    { device = "/dev/disk/by-uuid/385cd6a9-d389-4c38-97ac-bd809bba179d";
       fsType = "btrfs";
       options = [ "defaults,ssd,subvol=@log,compress=zstd:1,discard=async" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ac0256ea-024e-4c27-aa72-9eb89be30eed"; }
+    [ { device = "/dev/disk/by-uuid/5627e916-eebf-410c-86a0-31149892191c"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

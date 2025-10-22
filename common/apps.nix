@@ -18,6 +18,7 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.akonadi
+    kdePackages.ksshaskpass
     appimage-run
     avahi
     awscli2
