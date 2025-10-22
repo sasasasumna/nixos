@@ -33,17 +33,16 @@
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-
   # Suspend first
   boot.kernelParams = ["mem_sleep_default=deep"];
 
-  # Define time delay for hibernation
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-    SuspendState=mem
-  '';
+#   # Define time delay for hibernation
+#   systemd.sleep.extraConfig = ''
+#     HibernateDelaySec=30m
+#     SuspendState=mem
+#   '';
 
-  networking.hostName = "Adam-laptop";
+  networking.hostName = "Adam-Sumner";
 
   # Enable OpenGL
   hardware.graphics = {
@@ -97,9 +96,9 @@
       options = [ "defaults,ssd,subvol=@log,compress=zstd:1,discard=async" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/5627e916-eebf-410c-86a0-31149892191c"; }
-    ];
+#  swapDevices =
+#    [ { device = "/dev/disk/by-uuid/5627e916-eebf-410c-86a0-31149892191c"; }
+#    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
