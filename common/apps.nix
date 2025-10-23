@@ -17,8 +17,10 @@
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
-    kdePackages.akonadi
-    kdePackages.ksshaskpass
+    #kdePackages.akonadi
+    #kdePackages.ksshaskpass
+    #kdePackages.xdg-desktop-portal-kde
+    #kdePackages.plasma-thunderbolt
     appimage-run
     avahi
     awscli2
@@ -29,6 +31,7 @@
     curl
     dnsmasq
     doctl
+    docker-compose
     drm_info
     egl-wayland
     eksctl
@@ -39,6 +42,7 @@
     flarectl
     fuse
     fuse3
+    google-cloud-sdk
     gearlever
     ghostty
     git
@@ -77,13 +81,13 @@
     qt5.full
     qt6.full
     rclone
-    redis
     ripgrep
     slack
     spotify
     tmux
     traceroute
     unzip
+    valkey
     vdpauinfo
     vim 
     vips
@@ -91,11 +95,11 @@
     vulkan-tools
     wget
     #wrangler
-    xdg-desktop-portal
-    kdePackages.xdg-desktop-portal-kde
-    plasma5Packages.xdg-desktop-portal-kde
-    xdg-desktop-portal-xapp
+    #xdg-desktop-portal
+    #plasma5Packages.xdg-desktop-portal-kde
+    #xdg-desktop-portal-xapp
     xz
+    zed-editor
     zip
     zoom-us
   ];
