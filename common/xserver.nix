@@ -15,6 +15,7 @@
   services.gnome.core-apps.enable = true;
   services.gnome.core-developer-tools.enable = true;
   services.gnome.games.enable = false;
+  services.gnome.gnome-keyring.enable = true;
   environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
   environment.systemPackages = [ pkgs.gnomeExtensions.appindicator  ];
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
@@ -28,6 +29,12 @@
   programs.dconf.profiles.user.databases = [
     {
       settings = {
+        "org/gnome/desktop/interface" = {
+          accent-color = "blue";
+        };
+        "org/gnome/desktop/input-sources" = {
+          xkb-options = [ "ctrl:nocaps" ];
+        };
         "org/gnome/mutter" = {
           experimental-features = [
             "scale-monitor-framebuffer" # Enables fractional scaling (125% 150% 175%)
